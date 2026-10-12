@@ -40,8 +40,6 @@ missing = [f for f in ("customer", "item", "quantity") if f not in data]
 if missing:
 return jsonify(error=f"missing fields: {', '.join(missing)}"), 400
 with get_conn() as conn, conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-
-ShopEase Order Service – Podman Live Project Page 3
 cur.execute(
 "INSERT INTO orders (customer, item, quantity) VALUES (%s, %s, %s) "
 "RETURNING id, customer, item, quantity, status",
